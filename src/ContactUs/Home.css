@@ -86,8 +86,8 @@ h1 {
  
 }
 .box:hover{
- transform: translateY(-7px);
- box-shadow: 0 18px 33px 6px rgb(0 0 0 / 10%);
+ /* transform: translateY(-7px); */
+ /* box-shadow: 0 18px 33px 6px rgb(0 0 0 / 10%); */
 
   }
     
@@ -95,31 +95,26 @@ h1 {
 
 .icons{
     font-size: 50px;
-    color:var(--color-primary);
+    color:#fe813a;
+    text-align: center;
 
 }
-.box:hover .icons
-{
-    margin-top: 0px;
-    color: var(--color-primary);
-}
+
 .box h2{
     font-weight: bold;
     margin-top: 25px;
+    text-align: center;
 }
-.box:hover h2{
- color: var(--color-subheading)
 
-   
-}
 .box p{
     color: grey;
     font-weight: 400;
     margin-top: 25px;
+    text-align: center;
 }
-.box:hover p{
-    color: #000000;
-}
+
+
+
 .home_heading {
   text-align: center;
   margin-bottom: 20px;
@@ -136,6 +131,8 @@ h1 {
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.5em;
+  color: blue;
+
 }
 
 .home_paragraph {
@@ -159,6 +156,7 @@ h1 {
   font-size: 16px;
   color: #666; /* Adjust the color as needed */
 }
+
 
 
 

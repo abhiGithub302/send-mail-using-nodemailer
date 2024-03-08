@@ -2,6 +2,15 @@ import React from "react";
 import "./Home.css";
 import img from "../assets/back.jpg";
 import { FaHandHoldingDollar } from "react-icons/fa6";
+import { FaInfinity } from "react-icons/fa6";
+import { FaRocket } from "react-icons/fa";
+import { MdOutlineSecurity } from "react-icons/md";
+import { FaUserFriends } from "react-icons/fa";
+import { FiLayers } from "react-icons/fi";
+
+
+
+
 
 function Home() {
   return (
@@ -30,11 +39,14 @@ function Home() {
         </div>
         <div class="box__container">
           <div class="box">
-            <div className="icons"></div>
+            <div className="icons">
+            <FaInfinity />
+
+            </div>
             <h2>Everlasting </h2>
             <p>
               Our licenses are perpetual and have no expiration date. When you
-              acquire a TSplus software, it becomes your permanent possession.
+              acquire a ConnectApp software, it becomes your permanent possession.
               Eternally yours.
             </p>
           </div>
@@ -51,7 +63,10 @@ function Home() {
             </p>
           </div>
           <div class="box">
-            <div className="icons">{/* <IoServerSharp /> */}</div>
+            <div className="icons">
+            <FaRocket />
+
+            </div>
             <h2>Rapid Implementation</h2>
             <p>
               Optimize your time and budget with our swift deployment procedure.
@@ -61,7 +76,10 @@ function Home() {
         </div>
         <div class="box__container">
           <div class="box">
-            <div className="icons">{/* <IoServerSharp /> */}</div>
+            <div className="icons">
+            <MdOutlineSecurity />
+
+            </div>
             <h2>Secure</h2>
             <p>
               Our software consistently aligns with the most recent security
@@ -69,7 +87,8 @@ function Home() {
             </p>
           </div>
           <div class="box">
-            <div className="icons">{/* <VscRemoteExplorer /> */}</div>
+            <div className="icons"><FaUserFriends />
+</div>
             <h2> Intuitive for users </h2>
             <p>
               Discover all the functionalities and utilities you require,
@@ -78,7 +97,8 @@ function Home() {
             </p>
           </div>
           <div class="box">
-            <div className="icons">{/* <IoServerSharp /> */}</div>
+            <div className="icons"><FiLayers />
+</div>
             <h2>Versatile</h2>
             <p>
               We effectively offer solutions for prominent and expansive
