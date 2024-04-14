@@ -1,17 +1,73 @@
 // src/components/ContactUsForm.jsx
 import React, { useState } from "react";
 import "./ContactUsForm.css";
-import { FaLocationDot } from "react-icons/fa6";
-import { FaAddressBook } from "react-icons/fa6";
 
-import { PiPhoneCallFill } from "react-icons/pi";
-import { MdEmail } from "react-icons/md";
-import { IoIosContacts } from "react-icons/io";
+import axios from "axios";
 
 const ContactUsForm = () => {
+  // State Initialization
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [message, setMessage] = useState("");
+  const [sent, setSent] = useState(false);
+  
+
+  // Input Change Handlers
+  const handleFirstNameChange = (e) => setFirstName(e.target.value);
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handleCompanyNameChange = (e) => setCompanyName(e.target.value);
+  const handleMobileNumberChange = (e) => setMobileNumber(e.target.value);
+  const handleMessageChange = (e) => setMessage(e.target.value);
+
+  // Form Submission Handler
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", {
+      firstName,
+      email,
+      companyName,
+      mobileNumber,
+      message,
+    });
+    const data = {
+      firstName,
+      email,
+      companyName,
+      mobileNumber,
+      message,
+    };
+    axios
+      .post("/api/formEndpoint", data)
+      .then((response) => {
+        setSent(true);
+        alert("Form submitted successfully!");
+        // console.log("Server response:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error submitting form:", error);
+      });
+
+    // Reset the form after submission
+    resetForm();
+  };
+
+  // Form Reset Handler
+  const resetForm = () => {
+    setFirstName("");
+    setEmail("");
+    setCompanyName("");
+    setMobileNumber("");
+    setMessage("");
+    setTimeout(() => {
+      setSent(false);
+    }, 30000);
+  };
+
   return (
     <div>
-      <div className="contactus_container">
+      <div className="contactus_container" id="contactUsId">
         <div class="contactus_box ">
           <div class="time_line_iconss">
             <i class="fas fa-headphones"></i>
@@ -84,7 +140,7 @@ const ContactUsForm = () => {
           <address class="contact-us-content_bottom-info-details">
             <a href="mailto:accounts@itinfrasolutions.co.in">
               <div class="contact-info-text">
-              <i class="fa fa-envelope" aria-hidden="true"></i>
+                <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span> accounts@itinfrasolutions.co.in</span>
               </div>
             </a>
@@ -108,7 +164,7 @@ const ContactUsForm = () => {
         {/* hr team box */}
         <div class="contactus_box">
           <div class="time_line_iconss">
-            <IoIosContacts />
+            <i class="fa-solid fa-user-tie"></i>
           </div>
           <h2>HR Team</h2>
 
@@ -139,34 +195,33 @@ const ContactUsForm = () => {
       </div>
       <div className="contact-container">
         <div className="contact-form-container">
-          <form action="/" method="POST">
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
               <div className="contactHead">
-              <h1>Contact Us Form:</h1>
-              <p>
-                (Tell us a bit about yourself, and we'll get in touch as soon as we can.)
-              </p>
+                <h1>Contact Us Form:</h1>
+                <p>
+                  (Tell us a bit about yourself, and we'll get in touch as soon
+                  as we can.)
+                </p>
               </div>
-
-              <label htmlFor="firstName">First Name:</label>
+              <label htmlFor="firstName">Full Name:</label>
               <input
                 type="text"
-                id="name"
-                name="name"
-                placeholder="FirstName"
-                // onChange={handleFirstNameChange}
+                id="firstName"
+                value={firstName}
+                placeholder="Write Your Full Name"
+                onChange={handleFirstNameChange}
                 required
               />
             </div>
             <div className="form-group">
               <label htmlFor="email">Email:</label>
               <input
-                type="text"
+                type="email"
                 id="email"
-                name="email"
-
-                placeholder="email"
-                // onChange={handleLastNameChange}
+                value={email}
+                placeholder="Enter Your Email Address"
+                onChange={handleEmailChange}
                 required
               />
             </div>
@@ -174,10 +229,10 @@ const ContactUsForm = () => {
               <label htmlFor="companyName">Company Name:</label>
               <input
                 type="text"
-                id="companyName"
-                name="companyname"
-                placeholder="YourCompanyName"
-                // onChange={handleCompanyNameChange}
+                id="CompanyName"
+                value={companyName}
+                placeholder="Your Company Name"
+                onChange={handleCompanyNameChange}
                 required
               />
             </div>
@@ -185,10 +240,11 @@ const ContactUsForm = () => {
               <label htmlFor="mobileNumber">Mobile Number:</label>
               <input
                 type="tel"
-                id="mobile"
-              name="mobile"
-                placeholder="MobileNumber"
-                // onChange={handleMobileNumberChange}
+                id="mobileNumber"
+                value={mobileNumber}
+                placeholder="Your Mobile Number"
+                onChange={handleMobileNumberChange}
+                maxLength={15}
                 required
               />
             </div>
@@ -196,15 +252,17 @@ const ContactUsForm = () => {
               <label htmlFor="message">Message:</label>
               <textarea
                 id="message"
-                name="mess"
+                value={message}
                 rows={12}
-                placeholder="WriteMessageHere"
-                // onChange={handleMessageChange}
+                placeholder="Write Your Message Here"
+                onChange={handleMessageChange}
                 required
-
-/>
+              />
             </div>
-            <button type="submit" value="Submit">Submit</button>
+            <div className={sent ? "msg msgAppear" : "msg"}>
+              Thanks for Your Message !
+            </div>
+            <button type="submit">Submit</button>
           </form>
         </div>
         <div className="map-and-contact">
@@ -214,14 +272,13 @@ const ContactUsForm = () => {
             <h2>It Infra Solutions</h2>
 
             <div class="contact-info-text">
-            <i class="fa-solid fa-location-dot"></i>
+              <i class="fa-solid fa-location-dot"></i>
               <span id="span">
                 A- 48/2, Mahavir Enclave, Near Dwarka puri bus stand
                 NewDelhi-110059{" "}
               </span>
             </div>
 
-            
             <a href="tel:+919015739026">
               <div class="contact-info-text">
                 <i class="fas fa-phone-alt" aria-hidden="true"></i>
@@ -235,7 +292,15 @@ const ContactUsForm = () => {
               </div>
             </a>
           </div>
-          
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.9591933233382!2d77.07798787620673!3d28.601000975681977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b82c54a2bab%3A0xf07e443bc86e4a52!2sIT%20Infra%20Solutions!5e0!3m2!1sen!2sin!4v1707210514583!5m2!1sen!2sin"
+            width="100%"
+            height="450"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
       </div>
     </div>
