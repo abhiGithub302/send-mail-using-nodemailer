@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 //     res.send('Welcome to my forms');
 // });
 
-app.get('/api/formEndpoint', (req, res) => {
+app.post('/api/formEndpoint', (req, res) => {
     let data = req.body;
     let smtpTransport = nodemailer.createTransport({
         service: 'gmail',
